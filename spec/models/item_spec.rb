@@ -79,7 +79,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price Half-width number")
       end
       it "priceが10,000,000以上では場合は登録できないこと" do
-        @item.price = "10,000,000" 
+        @item.price = 10,000,000 
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Half-width number")
       end

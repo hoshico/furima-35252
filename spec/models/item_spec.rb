@@ -28,27 +28,27 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Info can't be blank")
       end   
-      it "category_idがない場合は登録できないこと" do
+      it "category_idが「0」では登録できないこと" do
         @item.category_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Category Select")
       end  
-      it "status_idがない場合は登録できないこと" do
+      it "status_idが「0」では登録できないこと" do
         @item.status_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Status Select")
       end
-      it "shipping_fee_status_idがない場合は登録できないこと" do
+      it "shipping_fee_status_idが「0」では登録できないこと" do
         @item.shipping_fee_status_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fee status Select")
       end
-      it "prefecture_idがない場合は登録できないこと" do
+      it "prefecture_idが「0」では登録できないこと" do
         @item.prefecture_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture Select")
       end
-      it 'scheduled_delivery_idがない場合は登録できないこと' do
+      it 'scheduled_delivery_idが「0」では登録できないこと' do
         @item.scheduled_delivery_id = 0 
         @item.valid?
         expect(@item.errors.full_messages).to include("Scheduled delivery Select")
@@ -58,10 +58,15 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
-      it 'priceが¥300~¥9,999,999の間でない場合は登録できないこと' do
+      it 'priceが299以下では登録できないこと間でない場合は登録できないこと' do
         @item.price = 200 
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+      it "priceが10,000,000以上では場合は登録できないこと" do
+        @item.price = 10,000,000 
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Half-width number")
       end
       it "priceが半角数字でない場合は登録できないこと" do
         @item.price = "５００" 
@@ -75,11 +80,6 @@ RSpec.describe Item, type: :model do
       end
       it "priceが半角英語だけでは登録できないこと" do
         @item.price = "tttttt" 
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Price Half-width number")
-      end
-      it "priceが10,000,000以上では場合は登録できないこと" do
-        @item.price = 10,000,000 
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Half-width number")
       end

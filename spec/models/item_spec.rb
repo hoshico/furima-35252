@@ -9,7 +9,7 @@ RSpec.describe Item, type: :model do
     context '内容に問題ない場合' do
       it '全ての値が正しければ登録できること' do
         expect(@item).to be_valid
-      end  
+      end
     end
 
     context '内容に問題がある場合' do
@@ -18,70 +18,70 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
-      it "nameがない場合は登録できないこと" do
+      it 'nameがない場合は登録できないこと' do
         @item.name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
       end
-      it "infoがない場合は登録できないこと" do
-        @item.info = '' 
+      it 'infoがない場合は登録できないこと' do
+        @item.info = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Info can't be blank")
-      end   
-      it "category_idが「0」では登録できないこと" do
+      end
+      it 'category_idが「0」では登録できないこと' do
         @item.category_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category Select")
-      end  
-      it "status_idが「0」では登録できないこと" do
+        expect(@item.errors.full_messages).to include('Category Select')
+      end
+      it 'status_idが「0」では登録できないこと' do
         @item.status_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status Select")
+        expect(@item.errors.full_messages).to include('Status Select')
       end
-      it "shipping_fee_status_idが「0」では登録できないこと" do
+      it 'shipping_fee_status_idが「0」では登録できないこと' do
         @item.shipping_fee_status_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping fee status Select")
+        expect(@item.errors.full_messages).to include('Shipping fee status Select')
       end
-      it "prefecture_idが「0」では登録できないこと" do
+      it 'prefecture_idが「0」では登録できないこと' do
         @item.prefecture_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture Select")
+        expect(@item.errors.full_messages).to include('Prefecture Select')
       end
       it 'scheduled_delivery_idが「0」では登録できないこと' do
-        @item.scheduled_delivery_id = 0 
+        @item.scheduled_delivery_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Scheduled delivery Select")
+        expect(@item.errors.full_messages).to include('Scheduled delivery Select')
       end
       it 'priceがない場合は登録できないこと' do
-        @item.price = '' 
+        @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it 'priceが299以下では登録できないこと' do
-        @item.price = 200 
+        @item.price = 200
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
-      it "priceが10,000,000以上では登録できないこと" do
-        @item.price = 10,000,000 
+      it 'priceが10,000,000以上では登録できないこと' do
+        @item.price = 10, 0o00, 0o00
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Half-width number")
+        expect(@item.errors.full_messages).to include('Price Half-width number')
       end
-      it "priceが半角数字でない場合は登録できないこと" do
-        @item.price = "５００" 
+      it 'priceが半角数字でない場合は登録できないこと' do
+        @item.price = '５００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Half-width number")
+        expect(@item.errors.full_messages).to include('Price Half-width number')
       end
-      it "priceが半角英数字混合では登録できないこと" do
-        @item.price = "1111yen" 
+      it 'priceが半角英数字混合では登録できないこと' do
+        @item.price = '1111yen'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Half-width number")
+        expect(@item.errors.full_messages).to include('Price Half-width number')
       end
-      it "priceが半角英語だけでは登録できないこと" do
-        @item.price = "tttttt" 
+      it 'priceが半角英語だけでは登録できないこと' do
+        @item.price = 'tttttt'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Half-width number")
+        expect(@item.errors.full_messages).to include('Price Half-width number')
       end
     end
   end

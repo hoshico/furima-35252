@@ -23,7 +23,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path
   end
 
   def update
@@ -51,6 +50,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    return redirect_to action: :index if (current_user.id != @item.user_id) || !@item.order.nil?
+    return redirect_to action: :index if (current_user.id != @item.user_id) || @item.order != nil
   end
 end

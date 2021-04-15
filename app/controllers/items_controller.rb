@@ -23,12 +23,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path if current_user == @item.user
+    redirect_to root_path
   end
 
   def update
     if @item.update(item_params)
-      redirect_to item_path(@item.id) if current_user == @item.user
+      redirect_to item_path(@item.id)
     else
       render :edit
     end
@@ -51,6 +51,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    return redirect_to action: :index unless current_user.id == @item.user_id
+    return redirect_to action: :index if (current_user.id != @item.user_id) || !@item.order.nil?
   end
 end
